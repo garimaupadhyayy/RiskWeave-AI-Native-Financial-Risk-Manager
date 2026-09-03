@@ -1,0 +1,40 @@
+# Simulator Configuration
+
+simulation:
+  days: 30
+  start_date: "2026-09-01T00:00:00"
+  total_transactions_target: 500000
+
+entities:
+  customers: 10000
+  merchants: 500
+  devices_per_customer: 1.5
+  ips_per_customer: 2.0
+
+legitimate_edge_cases:
+  corporate_network:
+    user_count: 200
+    shared_ip: "corp_ip_primary"
+    active_hours: [11, 12, 13, 14] # Lunch hours
+  high_rollers:
+    user_count: 100
+    amount_multiplier: 25.0
+
+attacks:
+  burst:
+    events: 50
+    tx_per_event: [20, 100]
+    duration_mins: [5, 30]
+  slow_bleed:
+    events: 20
+    tx_per_event: [10, 30]
+    duration_days: [5, 25]
+    amount_multiplier: 5.0
+  star_graph:
+    events: 10
+    accounts_per_merchant: [20, 100]
+  rotating_device_ring:
+    events: 15
+    active_days: [26, 30] # ONLY unseen topology period
+    devices: 5
+    accounts: 25

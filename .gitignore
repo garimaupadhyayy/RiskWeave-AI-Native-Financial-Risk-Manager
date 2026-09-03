@@ -1,0 +1,11 @@
+# Sensitive Data
+.env
+
+# Environments & Dependencies
+venv/
+node_modules/
+
+# Builds & Cache
+.next/
+__pycache__/
+*.pyc
