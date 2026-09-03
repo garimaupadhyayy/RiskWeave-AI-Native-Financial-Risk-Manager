@@ -1,5 +1,5 @@
 ﻿<div align="center">
-  <img src="frontend/public/icon.svg" alt="RiskWeave Logo" width="100"/>
+  
   <h1>RiskWeave: AI-Native Financial Risk Manager</h1>
   <p><strong>Razorpay AI Buildathon 2026 Submission</strong></p>
 
