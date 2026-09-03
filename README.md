@@ -1,9 +1,7 @@
-﻿# RiskWeave 🛡️
-**Enterprise AI-Native Financial Risk Manager**
+﻿<div align="center">
+  <h1>🛡️ RiskWeave: Enterprise AI-Native Financial Risk Manager</h1>
+  <p><strong>Razorpay AI Buildathon 2026 Submission (Track 02: AI Risk Manager)</strong></p>
 
-A paradigm-shifting autonomous risk platform that reimagines fraud detection as a **financial optimization problem**. RiskWeave ingests transactions, calculates a 10-Dimensional Behavioral DNA vector, traverses live graph topologies in MySQL to detect entity-rings, and uses Google Gemini to mathematically minimize Expected Loss while generating real-time Analyst investigation reports.
-
-<div align="center">
   <img width="800" alt="RiskWeave Dashboard" src="https://github.com/user-attachments/assets/5f970473-ccfe-434d-bbca-2cbcd4296344" />
 </div>
 
@@ -19,22 +17,37 @@ A paradigm-shifting autonomous risk platform that reimagines fraud detection as 
 
 ---
 
-## 🧠 The Problem & Our Solution
+## 🎯 Alignment with the Razorpay Track 02 Objective
 
-**The Problem:** Traditional fraud systems rely on simple binary classification (blocking or allowing transactions). This leads to massive revenue loss due to **"false positive insults"**—declining a legitimate customer. Furthermore, traditional ML relies on historical static IDs (Merchant ID, User ID) which fail instantly when fraudsters rotate devices or use synthetic identities in zero-day attacks.
+The core prompt for Track 02 was to *"Stop the merchant losing money to fraud"* while providing *"honest metrics including false-positive cost"*. We designed RiskWeave explicitly to be the ultimate answer to this prompt. 
 
-**The RiskWeave Solution:** 
-RiskWeave completely bypasses static rules. It translates raw transactions into a **10-Dimensional Behavioral DNA vector** (Velocity Burst, Entity Reuse, Graph Degree Proxy, Refund Coupling, etc.). It then calculates the exact `$E[Cost]` for 5 possible interventions (`ALLOW`, `MONITOR`, `STEP_UP`, `REVIEW`, and `HOLD`). It factors in margin loss, operational SMS costs, and cart-abandonment friction to select the action that mathematically minimizes Razorpay's financial loss, all in under 50ms.
+We didn't just build a simple "fraud detector." We built an **Abuse-Ring Sentinel** (using live Graph databases) and a **Fraud-Spike Detector** (using Redis velocity windows). 
+
+Most importantly, we directly answered the requirement for **false-positive cost metrics**: instead of a standard ML model that blindly blocks transactions over a 90% threshold, RiskWeave treats fraud as a **Financial Optimization Problem**. It actively calculates the margin lost to a "false-positive insult" (declining a legitimate user) versus the cost of a manual review, and uses calculus to pick the cheapest intervention.
 
 ---
 
-## ⚡ What It Does
+## 🧠 The Problem & Our Solution
 
-* **Live Transaction Feed & Radar:** Streams incoming transactions and instantly visually maps their 10-D Attack DNA onto a live radar chart using Recharts, allowing analysts to instantly see the "shape" of an attack (e.g., a massive spike in Velocity Burst and Graph Degree).
-* **MySQL-Native Graph Intelligence:** Bypasses the heavy infrastructure requirement of Neo4j. By utilizing highly-optimized `WITH RECURSIVE` Common Table Expressions (CTEs) in MySQL 8.0, RiskWeave maps the 2-hop entity radius (Customer -> Device/IP -> Peers) of an anomalous transaction in real-time.
+### The Problem: The Hidden Cost of Binary Fraud Systems
+Modern financial institutions are bleeding margin not just to fraud, but to their own defense systems. Traditional fraud pipelines rely on simple binary classification (Allow vs. Block). If a transaction looks risky, it is blocked. 
+However, this leads to massive revenue loss due to **"false positive insults"**—insulting and permanently losing a legitimate customer because their transaction was falsely flagged. Furthermore, traditional ML models rely on static, historical IDs (Merchant ID, User ID) to learn. In the era of AI-enabled fraud, attackers instantly rotate synthetic identities and device fingerprints, rendering historical IDs useless and resulting in devastating zero-day attacks.
+
+### The RiskWeave Solution: Autonomous Financial Optimization
+RiskWeave completely bypasses static rules and binary thresholds. 
+
+1. **Zero-Day Generalization:** Instead of looking at *who* the user is, RiskWeave looks at *what* the user is doing. It translates raw transactions into a **10-Dimensional Behavioral DNA vector** (measuring Velocity Bursts, Entity Reuse, Graph Degree Proxies, and Refund Coupling). This allows it to instantly recognize the "shape" of an attack, even if the fraudster is using brand-new synthetic identities.
+2. **The Expected Cost Matrix:** Once the XGBoost model outputs a probability of fraud, RiskWeave calculates the exact expected dollar-loss (`$E[Cost]`) for 5 possible interventions (`ALLOW`, `MONITOR`, `STEP_UP`, `REVIEW`, and `HOLD`). It factors in your business's profit margin, operational SMS/MFA costs, and cart-abandonment friction to select the action that mathematically minimizes the merchant's financial loss in real-time.
+
+---
+
+## ⚡ What It Does (Core Features)
+
+* **Live Transaction Feed & Radar:** Streams incoming transactions and instantly visually maps their 10-D Attack DNA onto a live radar chart using Recharts, allowing human analysts to instantly see the visual "shape" of an attack (e.g., a massive spike in Velocity Burst and Graph Degree).
+* **MySQL-Native Graph Intelligence:** To detect Abuse Rings, you normally need heavy, expensive graph databases like Neo4j. RiskWeave bypasses this entirely by utilizing highly-optimized `WITH RECURSIVE` Common Table Expressions (CTEs) natively inside MySQL 8.0. It maps the 2-hop entity radius (Customer -> Device/IP -> Peers) of an anomalous transaction in real-time, executing complex topology searches in under 50ms.
 * **Financial Cost Optimizer:** Automatically calculates the mathematical Expected Loss for all possible actions. For example, it automatically chooses `STEP_UP` (MFA) over `HOLD` for medium-risk, high-value transactions to preserve conversion rates, because the $118.75 insult cost of a false positive outweighs a $5.00 manual review fee.
-* **GenAI Advisory Investigator:** Integrates Google Gemini 2.5 to translate complex XGBoost math and Graph Degree velocity into a plain-English narrative. Gemini acts strictly as a "Fail-Closed" advisor, generating a human-readable markdown report for the risk analyst dashboard explaining *why* the transaction is dangerous.
-* **Data Leakage Immunity:** Engineered with a foolproof temporal rolling window architecture to ensure that future ground-truth data is never accidentally leaked into the training features.
+* **GenAI Advisory Investigator:** Integrates Google Gemini 2.5 to translate complex XGBoost math and Graph Degree velocity into a plain-English narrative. Gemini acts strictly as a "Fail-Closed" advisor, generating a human-readable markdown report for the risk analyst dashboard explaining *exactly why* the XGBoost model flagged the transaction.
+* **Data Leakage Immunity:** Engineered with a foolproof temporal rolling window architecture to ensure that future ground-truth labels are never accidentally leaked into the training features.
 
 ---
 
@@ -53,7 +66,7 @@ RiskWeave completely bypasses static rules. It translates raw transactions into 
 
 ```text
 RiskWeave-AI-Native-Financial-Risk-Manager/
-├── frontend/                 FastAPI application
+├── frontend/                 Next.js 14 Analyst Dashboard
 │   ├── src/app/
 │   │   ├── page.tsx          Main Dashboard UI, Live Feed, and Radar Logic
 │   │   ├── globals.css       Global styles and Tailwind imports
@@ -77,7 +90,7 @@ RiskWeave-AI-Native-Financial-Risk-Manager/
 
 ## 💻 Running Locally (For Evaluators)
 
-While the project is fully deployed to the cloud, you can easily spin up the entire architecture on your local machine to test the raw Graph Database capabilities.
+While the project is fully deployed to the cloud, evaluators can spin up the entire architecture on their local machine to test the raw Graph Database capabilities.
 
 **Prerequisites:** [Docker Desktop](https://www.docker.com/products/docker-desktop) installed.
 
