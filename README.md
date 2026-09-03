@@ -3,6 +3,8 @@
   <p><strong>Razorpay AI Buildathon 2026 Submission (Track 02: AI Risk Manager)</strong></p>
 
   <img width="800" alt="RiskWeave Dashboard" src="https://github.com/user-attachments/assets/5f970473-ccfe-434d-bbca-2cbcd4296344" />
+  <img width="1906" height="891" alt="image" src="https://github.com/user-attachments/assets/34fe4bec-502d-4146-b0a8-2bd0e601666c" />
+
 </div>
 
 ---
