@@ -6,12 +6,20 @@
   <img width="800" alt="RiskWeave Dashboard" src="https://github.com/user-attachments/assets/5f970473-ccfe-434d-bbca-2cbcd4296344" />
 
   <p>
+    <a href="#live-demo--links">Live Demo</a> •
     <a href="#key-innovations">Innovations</a> •
     <a href="#project-structure">Project Structure</a> •
-    <a href="#how-to-run-locally">How to Run Locally</a> •
     <a href="#system-health--testing">Testing</a>
   </p>
 </div>
+
+---
+
+## 🚀 Live Demo & Links
+*(Note to judges: Use these links to test the deployed application)*
+* **Frontend Dashboard:** [https://your-vercel-link-here.vercel.app](#) *(Replace this link)*
+* **Backend API (Swagger Docs):** [https://your-render-link-here.onrender.com/docs](#) *(Replace this link)*
+* **5-Minute Pitch Video:** [YouTube / Loom Link Here](#) *(Replace this link)*
 
 ---
 
@@ -57,71 +65,17 @@ RiskWeave-AI-Native-Financial-Risk-Manager/
 
 ---
 
-## 💻 How to Run Locally
-
-Because this project is designed for enterprise-grade security and speed, it is orchestrated to run completely on your local machine using Docker for the databases.
-
-### Step 1: Environment Variables
-Create a .env file in the root directory (where docker-compose.yml is) and add the following:
-\\\env
-# Project Settings
-PROJECT_NAME="RiskWeave"
-
-# MySQL Settings
-MYSQL_ROOT_PASSWORD=rootpassword
-MYSQL_DATABASE=riskweave
-MYSQL_USER=riskuser
-MYSQL_PASSWORD=riskpassword
-MYSQL_HOST=localhost
-MYSQL_PORT=3306
-
-# Redis Settings
-REDIS_HOST=localhost
-REDIS_PORT=6379
-
-# API Keys
-GEMINI_API_KEY=your_gemini_api_key_here
-\\\
-
-### Step 2: Start the Databases (Docker)
-Open a terminal in the project root and start the MySQL and Redis containers in the background:
-\\\ash
-docker-compose up -d mysql redis
-\\\
-
-### Step 3: Start the FastAPI Backend
-Open a **new terminal**, navigate to the backend folder, and start the Python server:
-\\\ash
-cd backend
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
-\\\
-*(The backend is now running at http://localhost:8000)*
-
-### Step 4: Start the Next.js Frontend
-Open another **new terminal**, navigate to the frontend folder, and start the UI:
-\\\ash
-cd frontend
-npm install
-npm run dev
-\\\
-*(The dashboard is now running at http://localhost:3000)*
-
----
-
 ## 🩺 System Health & Testing
 
-To verify the system is running correctly, you can check the following health endpoints:
+To verify the system is running correctly, you can check the live health endpoints:
 
-1. **Backend Health Check:**
-   Open your browser and go to: http://localhost:8000/health
+1. **Interactive API Documentation:**
+   Go to: [Your-Backend-URL]/docs
+   *This opens the live Swagger UI where you can manually test the AI risk evaluation endpoints.*
+
+2. **Backend Health Check:**
+   Go to: [Your-Backend-URL]/health
    *Expected Output: {"status": "ok", "mysql": "connected", "redis": "connected"}*
-
-2. **Interactive API Documentation:**
-   Go to: http://localhost:8000/docs
-   *This opens the Swagger UI where you can manually test the AI risk evaluation endpoints.*
 
 ---
 <div align="center">
