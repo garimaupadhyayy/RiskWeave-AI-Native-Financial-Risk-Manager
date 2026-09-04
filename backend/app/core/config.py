@@ -1,4 +1,4 @@
-from pydantic_settings import BaseSettings
+﻿from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "RiskWeave"
@@ -8,8 +8,7 @@ class Settings(BaseSettings):
     MYSQL_PASSWORD: str
     MYSQL_HOST: str
     MYSQL_PORT: int
-    REDIS_HOST: str
-    REDIS_PORT: int
+    REDIS_URL: str
     GEMINI_API_KEY: str | None = None
 
     class Config:

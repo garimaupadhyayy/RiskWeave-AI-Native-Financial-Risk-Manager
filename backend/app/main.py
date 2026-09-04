@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+﻿from fastapi import FastAPI
 import mysql.connector
 from mysql.connector import Error as MySQLError
 import redis
@@ -30,7 +30,7 @@ def health_check():
             user=settings.MYSQL_USER,
             password=settings.MYSQL_PASSWORD,
             database=settings.MYSQL_DATABASE,
-            connect_timeout=2
+            connect_timeout=5, ssl_verify_cert=False, ssl_verify_identity=False
         )
         if conn.is_connected():
             status["mysql"] = "connected"
@@ -41,7 +41,7 @@ def health_check():
 
     # Check Redis
     try:
-        r = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, socket_connect_timeout=2)
+        r = redis.from_url(settings.REDIS_URL, socket_connect_timeout=5, ssl_verify_cert=False, ssl_verify_identity=False)
         if r.ping():
             status["redis"] = "connected"
     except redis.RedisError as e:
@@ -53,3 +53,5 @@ def health_check():
 @app.get("/")
 def read_root():
     return {"message": f"Welcome to {settings.PROJECT_NAME} API"}
+
+
