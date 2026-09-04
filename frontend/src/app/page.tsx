@@ -528,15 +528,21 @@ export default function Dashboard() {
         </header>
 
         {/* Tab Content */}
-        <main className="flex-1 p-8 overflow-hidden relative">
+        <main className="flex-1 p-8 overflow-hidden relative flex flex-col min-h-0">
           <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-900/10 via-transparent to-transparent"></div>
-          {activeTab === 'overview' && renderOverview()}
-          {activeTab === 'investigation' && renderInvestigation()}
-          {activeTab === 'graph' && renderGraph()}
-          {activeTab === 'evaluation' && renderEvaluation()}
+          
+          <div className="flex-1 w-full h-full min-h-0 relative">
+            <div className="absolute inset-0">
+              {activeTab === 'overview' && renderOverview()}
+              {activeTab === 'investigation' && renderInvestigation()}
+              {activeTab === 'graph' && renderGraph()}
+              {activeTab === 'evaluation' && renderEvaluation()}
+            </div>
+          </div>
         </main>
       </div>
     </div>
   );
 }
+
 
