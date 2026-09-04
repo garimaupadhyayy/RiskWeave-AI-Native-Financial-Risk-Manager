@@ -14,7 +14,7 @@
 | Component | URL |
 | :--- | :--- |
 | **Analyst Dashboard** | [https://your-vercel-link-here.vercel.app](#) |
-| **API Docs (Swagger UI)** | [https://your-render-link-here.onrender.com/docs](#) |
+| **API Docs (Swagger UI)** | [https://riskweave-ai-native-financial-risk.onrender.com/docs](#) |
 | **Pitch Video** | [YouTube / Loom Link Here](#) |
 
 ---
@@ -137,3 +137,4 @@ Every transaction is mapped to a 10-Dimensional Vector. The XGBoost model calcul
 <div align="center">
   <i>Built with precision for the Razorpay AI Buildathon 2026.</i>
 </div>
+
