@@ -128,16 +128,44 @@ Open `http://localhost:3000`. Click the **"Simulate Zero-Day Attack"** button at
 
 ## 🔬 How Detection & Optimization Works
 
-Every transaction is mapped to a 10-Dimensional Vector. The XGBoost model calculates the probability of fraud ($P$), and the Optimizer uses this to calculate Expected Cost.
+Every transaction is mapped to a dynamic 10-Dimensional Vector (The Attack DNA). The XGBoost model calculates the probability of fraud ($P$), and the Cost Optimizer calculates the final intervention.
 
-| Attack Vector | Metric | What it Detects |
+### 🧬 The 10-Dimensional Attack DNA
+Instead of hardcoded rules, RiskWeave calculates floating-point behavioral metrics in real-time.
+
+| Attack Vector | Internal Metric | What it Detects (Topography) |
 | :--- | :--- | :--- |
-| **Velocity Burst** | `tx_count_1h` | Rapid succession of transactions from a single entity indicating a script/bot. |
-| **Graph Degree** | `device_account_count` | A single device or IP logging into dozens of different accounts (Rotating Device Ring). |
-| **Amount Escalation** | `amt_vs_avg_30d` | A compromised account suddenly making a purchase 10x larger than its historical average. |
-| **Refund Coupling** | `refund_ratio_7d` | Money laundering attempts where transactions are rapidly followed by chargebacks/refunds. |
-| **Entity Reuse** | `card_fingerprint_velocity` | Stolen credit card details being tested across multiple Razorpay merchant gateways. |
+| **Velocity Burst** | `dna_velocity_burst` | Extreme transaction acceleration from a single entity (Bot/Script Attacks). |
+| **Graph Degree** | `dna_graph_degree_proxy` | A single device or IP logging into dozens of different accounts (Rotating Device Rings). |
+| **Amount Escalation** | `dna_amount_escalation` | A compromised account suddenly making a purchase dramatically larger than its rolling 24h average (Account Takeover). |
+| **Refund Coupling** | `dna_refund_coupling` | Money laundering attempts where transactions are rapidly followed by chargebacks/refunds on the same merchant. |
+| **Entity Reuse** | `dna_entity_reuse_1h` | Stolen credit card details being tested across multiple Razorpay merchant gateways from one origin. |
+| **Auth Failure Rate** | `dna_auth_failure_rate` | High failure rates preceding a success (Card Cracking / Brute Force). |
+| **Merchant Conc.** | `dna_merchant_concentration` | Massive spikes in traffic hitting a single isolated merchant endpoint. |
+| **Temporal Density** | `dna_temporal_density_5m` | Unnatural clustering of timestamps indicating automated, non-human arrival rates. |
+| **Payment Diversity** | `dna_payment_diversity` | A single customer ID utilizing an unnatural variety of payment methods (Card + UPI + Netbanking) in minutes. |
+| **Account Age** | `dna_account_age_hours` | Correlation between account freshness and high-risk API hits. |
+
+### 📉 Attack Momentum 
+RiskWeave doesn't just look at a snapshot; it calculates the **Exponential Moving Average (EMA)** of the Velocity Burst and Graph Degree over time to generate a real-time `Attack Momentum` score. If a fraud ring is accelerating, the momentum score scales the Risk decision drastically upward before the breach occurs.
+
+### 🧮 The Financial Optimization Calculus (`argmin`)
+Most systems block at an arbitrary 90% threshold. RiskWeave makes decisions purely on lowest expected financial loss.
+
+For any given transaction value (`V`), we define:
+* **Cost of False Negative ($C_{FN}$):** $V + \text{Chargeback Fee}$ (The cost of letting fraud succeed)
+* **Cost of False Positive ($C_{FP}$):** $\text{Estimated LTV}$ (The devastating cost of permanently losing a real customer)
+* **Cost of Intervention ($C_{Int}$):** The operational cost of a specific friction (e.g., ₹2.00 for SMS OTP, ₹150 for Human Review)
+
+The XGBoost model outputs $P(Fraud)$. For every possible action $a \in \{\text{ALLOW, MONITOR, STEP\_UP, REVIEW, BLOCK}\}$, the Expected Cost is calculated:
+
+$$ E[Cost | a] = (P(Fraud) \cdot Cost_{Fraud|a}) + (P(Legit) \cdot Cost_{Insult|a}) + Cost_{Op|a} $$
+
+The **Deterministic Policy Engine** then simply executes the action that minimizes this formula:
+$$ Action = \text{argmin}_{a} E[Cost | a] $$
 
 <div align="center">
-  <i>Built with precision for the Razorpay AI Buildathon 2026.</i>
+  <br/>
+  <i>Engineered with precision for the Razorpay AI Buildathon 2026.</i><br/>
+  <b>Garima & Indresh</b>
 </div>
