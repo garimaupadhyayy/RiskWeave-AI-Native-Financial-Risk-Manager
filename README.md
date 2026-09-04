@@ -59,6 +59,63 @@ RiskWeave completely bypasses static rules and binary thresholds.
 
 ## 🧠 Deep Dive: How We Built It
 
+### 0. The Entire System in ONE Diagram
+
+```text
+       TRANSACTION
+            │
+            ▼
+   Feature Engineering
+            │
+            ▼
+      ┌──────────┐
+      │ Isolation│
+      │ Forest   │
+      └──────────┘
+            │
+     Anomaly detected
+            │
+            ▼
+   MySQL Graph Analysis
+        2-hop CTE
+            │
+            ▼
+       Attack DNA
+            │
+            ▼
+         XGBoost
+      "What's next?"
+            │
+            ▼
+     SHAP Explanation
+            │
+            ▼
+    Financial Optimizer
+            │
+      ┌─────┼─────┐
+      ▼     ▼     ▼
+    ALLOW REVIEW HOLD
+      │     │     │
+      └─────┼─────┘
+            │
+            ▼
+      Policy Engine
+            │
+            ▼
+       Safety Gate
+            │
+            ▼
+      FINAL ACTION
+            │
+            ▼
+      ┌──────────┐
+      │ Gemini   │
+      │ Invest.  │
+      └──────────┘
+            │
+     Explanation only
+```
+
 ### 1. The Synthetic Data Simulator
 Because real banking data contains highly sensitive PII, we engineered a custom Python simulator to generate 500,000 rows of hyper-realistic transactional data over a 30-day period. Our simulator accurately models complex attack topologies:
 * **The Slow Bleed:** A smart attacker testing one stolen card every 3 hours to stay under the ML radar.
