@@ -548,11 +548,7 @@ export default function Dashboard() {
           </div>
           
           <div className="flex items-center gap-6">
-            <div className="flex bg-slate-900 rounded-lg border border-slate-700 p-1">
-              {['1H', '24H', '7D', '30D'].map(t => (
-                <button key={t} onClick={() => setTimeRange(t)} className={`text-xs px-4 py-1.5 rounded-md font-bold transition-all ${t === timeRange ? 'bg-slate-700 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'}`}>{t}</button>
-              ))}
-            </div>
+
             <button 
               onClick={simulateIncoming}
               disabled={isSimulating}
