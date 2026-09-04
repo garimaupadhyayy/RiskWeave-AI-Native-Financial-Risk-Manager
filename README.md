@@ -2,9 +2,11 @@
   <h1>🛡️ RiskWeave: Enterprise AI-Native Financial Risk Manager</h1>
   <p><strong>Razorpay AI Buildathon 2026 Submission (Track 02: AI Risk Manager)</strong></p>
 
-  <img width="800" alt="RiskWeave Dashboard Simulation" src="https://github.com/user-attachments/assets/011f8206-4a32-4745-96f4-efe7375e57b1" />
-  <br/><br/>
-  <img width="800" alt="RiskWeave Dashboard Details" src="https://github.com/user-attachments/assets/34fe4bec-502d-4146-b0a8-2bd0e601666c" />
+  <img width="1917" height="905" alt="image" src="https://github.com/user-attachments/assets/6e4b493c-e29c-4b73-9ce5-607bcb36c20e" />
+  <img width="1913" height="907" alt="image" src="https://github.com/user-attachments/assets/d37e5596-d3c5-4017-910b-bcbf9f9b96dc" />
+  <img width="1917" height="905" alt="image" src="https://github.com/user-attachments/assets/075fb858-0cfc-48e0-ace6-6a4878379887" />
+  <img width="1912" height="916" alt="image" src="https://github.com/user-attachments/assets/3e2bf256-ca0f-41da-8997-1f2dd38f2d12" />
+ 
 </div>
 
 ---
