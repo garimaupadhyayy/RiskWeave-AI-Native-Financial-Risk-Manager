@@ -13,7 +13,7 @@
 
 | Component | URL |
 | :--- | :--- |
-| **Analyst Dashboard** | [https://riskweave.vercel.app](#) |
+| **Analyst Dashboard** | [[https://riskweave.vercel.app](https://riskweave.vercel.app/)](#) |
 | **Pitch Video** | [YouTube / Loom Link Here](#) |
 
 ---
