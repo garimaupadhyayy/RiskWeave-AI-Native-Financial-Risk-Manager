@@ -11,14 +11,50 @@ import 'reactflow/dist/style.css';
 // MOCK DATA & SIMULATOR PAYLOADS
 // -----------------------------------------------------------------------------
 
-const mockThreatData = [
-  { time: '10:00', volume: 450, anomalies: 12 },
-  { time: '11:00', volume: 520, anomalies: 18 },
-  { time: '12:00', volume: 480, anomalies: 15 },
-  { time: '13:00', volume: 1200, anomalies: 350 },
-  { time: '14:00', volume: 900, anomalies: 210 },
-  { time: '15:00', volume: 510, anomalies: 25 },
-];
+const timeRangeData: Record<string, any> = {
+  '1H': {
+    chartData: [
+      { time: '14:00', volume: 80, anomalies: 2 },
+      { time: '14:10', volume: 95, anomalies: 1 },
+      { time: '14:20', volume: 110, anomalies: 4 },
+      { time: '14:30', volume: 450, anomalies: 85 },
+      { time: '14:40', volume: 320, anomalies: 110 },
+      { time: '14:50', volume: 150, anomalies: 12 },
+    ],
+    exposure: '₹1.2L', blast: '₹4.5L', prevented: '₹0.8L', clusters: 1, clusterText: '1 CRITICAL', analyzed: '12,450'
+  },
+  '24H': {
+    chartData: [
+      { time: '10:00', volume: 450, anomalies: 12 },
+      { time: '11:00', volume: 520, anomalies: 18 },
+      { time: '12:00', volume: 480, anomalies: 15 },
+      { time: '13:00', volume: 1200, anomalies: 350 },
+      { time: '14:00', volume: 900, anomalies: 210 },
+      { time: '15:00', volume: 510, anomalies: 25 },
+    ],
+    exposure: '₹8.4L', blast: '₹21.7L', prevented: '₹4.8L', clusters: 3, clusterText: '1 CRITICAL, 2 HIGH', analyzed: '512,408'
+  },
+  '7D': {
+    chartData: [
+      { time: 'Mon', volume: 4500, anomalies: 120 },
+      { time: 'Tue', volume: 5200, anomalies: 180 },
+      { time: 'Wed', volume: 4800, anomalies: 150 },
+      { time: 'Thu', volume: 8200, anomalies: 950 },
+      { time: 'Fri', volume: 4900, anomalies: 210 },
+      { time: 'Sat', volume: 5100, anomalies: 125 },
+    ],
+    exposure: '₹34.2L', blast: '₹68.5L', prevented: '₹18.4L', clusters: 12, clusterText: '3 CRITICAL, 9 HIGH', analyzed: '3,481,920'
+  },
+  '30D': {
+    chartData: [
+      { time: 'Week 1', volume: 24500, anomalies: 820 },
+      { time: 'Week 2', volume: 25200, anomalies: 910 },
+      { time: 'Week 3', volume: 24800, anomalies: 850 },
+      { time: 'Week 4', volume: 38200, anomalies: 3950 },
+    ],
+    exposure: '₹142.5L', blast: '₹295.0L', prevented: '₹89.2L', clusters: 47, clusterText: '8 CRITICAL, 39 HIGH', analyzed: '14,924,105'
+  }
+};
 
 const initialNodes = [
   { id: 'c1', data: { label: 'Account A' }, position: { x: 250, y: 50 }, style: { background: '#1e293b', color: '#fff', border: '1px solid #334155', borderRadius: '8px', padding: '10px' } },
@@ -70,6 +106,7 @@ const mockZeroDayPayload = {
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('overview');
+  const [timeRange, setTimeRange] = useState('24H');
   const [isSimulating, setIsSimulating] = useState(false);
   const [simStep, setSimStep] = useState(0);
   const [transactions, setTransactions] = useState([
@@ -121,23 +158,23 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
           <p className="text-slate-400 text-sm font-medium mb-1">Current Exposure</p>
-          <h3 className="text-3xl font-bold text-white mb-2">₹8.4L</h3>
-          <p className="text-xs text-slate-500">Potential 24h Blast Radius: <span className="text-red-400 font-semibold">₹21.7L</span></p>
+          <h3 className="text-3xl font-bold text-white mb-2">{timeRangeData[timeRange].exposure}</h3>
+          <p className="text-xs text-slate-500">Potential Blast Radius: <span className="text-red-400 font-semibold">{timeRangeData[timeRange].blast}</span></p>
         </div>
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
           <p className="text-slate-400 text-sm font-medium mb-1">Expected Loss Prevented</p>
-          <h3 className="text-3xl font-bold text-emerald-400 mb-2">₹4.8L</h3>
+          <h3 className="text-3xl font-bold text-emerald-400 mb-2">{timeRangeData[timeRange].prevented}</h3>
           <p className="text-xs text-slate-500">vs. counterfactual ALLOW policy</p>
         </div>
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
           <p className="text-slate-400 text-sm font-medium mb-1">Active Attack Clusters</p>
-          <h3 className="text-3xl font-bold text-red-500 mb-2">3</h3>
-          <p className="text-xs text-slate-500">1 CRITICAL, 2 HIGH</p>
+          <h3 className="text-3xl font-bold text-red-500 mb-2">{timeRangeData[timeRange].clusters}</h3>
+          <p className="text-xs text-slate-500">{timeRangeData[timeRange].clusterText}</p>
         </div>
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
           <p className="text-slate-400 text-sm font-medium mb-1">Transactions Analyzed</p>
-          <h3 className="text-3xl font-bold text-white mb-2">512,408</h3>
-          <p className="text-xs text-emerald-500 font-semibold">↑ 100% Coverage</p>
+          <h3 className="text-3xl font-bold text-white mb-2">{timeRangeData[timeRange].analyzed}</h3>
+          <p className="text-xs text-emerald-500 font-semibold flex items-center gap-1"><TrendingUp size={12}/> 100% Coverage</p>
         </div>
       </div>
 
@@ -153,7 +190,7 @@ export default function Dashboard() {
           </div>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={mockThreatData}>
+              <LineChart data={timeRangeData[timeRange].chartData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
                 <XAxis dataKey="time" stroke="#475569" fontSize={12} />
                 <YAxis yAxisId="left" stroke="#475569" fontSize={12} />
@@ -513,7 +550,7 @@ export default function Dashboard() {
           <div className="flex items-center gap-6">
             <div className="flex bg-slate-900 rounded-lg border border-slate-700 p-1">
               {['1H', '24H', '7D', '30D'].map(t => (
-                <button key={t} className={`text-xs px-4 py-1.5 rounded-md font-bold transition-all ${t === '24H' ? 'bg-slate-700 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'}`}>{t}</button>
+                <button key={t} onClick={() => setTimeRange(t)} className={`text-xs px-4 py-1.5 rounded-md font-bold transition-all ${t === timeRange ? 'bg-slate-700 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'}`}>{t}</button>
               ))}
             </div>
             <button 
