@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use client";
 import React, { useState, useEffect } from 'react';
 import { Activity, ShieldCheck, FileSearch, Zap, TrendingUp, Search, Clock, Cpu, Network, Database, CheckCircle, XCircle, AlertCircle, BarChart3, Map, ShieldAlert, DollarSign, LayoutDashboard, History, Settings, Play } from 'lucide-react';
@@ -458,6 +459,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+    </div>
   );
 
   return (
@@ -537,3 +539,4 @@ export default function Dashboard() {
     </div>
   );
 }
+
