@@ -2,7 +2,7 @@
   <h1>🛡️ RiskWeave: Enterprise AI-Native Financial Risk Manager</h1>
   <p><strong>Razorpay AI Buildathon 2026 Submission (Track 02: AI Risk Manager)</strong></p>
 
-  <img width="1917" height="905" alt="image" src="https://github.com/user-attachments/assets/6e4b493c-e29c-4b73-9ce5-607bcb36c20e" />
+  <img width="1917" height="911" alt="image" src="https://github.com/user-attachments/assets/912ca3f0-cd06-4724-a679-967169d02617" />
 
 
   
